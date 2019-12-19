@@ -17,17 +17,13 @@ const saveNotes = (notes) => {
     }
 }
 
-const logNote = (note) => {
+const logNote = (note) => 
     console.log('Title: ' + note.title + '\nBody: ' + note.body + '\n')
-}
 
 // add note
 const addNote = (title, body) => {
     const notes = loadNotes();
-    const dupes = notes.filter((note) => {
-        return note.title === title;
-    })
-
+    const dupes = notes.filter((note) => note.title === title)
     if (dupes.length === 0) {
         notes.push({ title: title, body: body});
         saveNotes(notes);
@@ -39,10 +35,7 @@ const addNote = (title, body) => {
 
 const removeNote = (title) => {
     const notes = loadNotes();
-    var filtered = notes.filter((note) => {
-        return note.title !== title;
-    })
-
+    var filtered = notes.filter((note) => note.title !== title)
     if(filtered.length < notes.length) {
         saveNotes(filtered);
         console.log(chalk.bgGreen('Note ' + title + ' removed'))
@@ -52,10 +45,7 @@ const removeNote = (title) => {
 } 
 
 const readNote = (title) => {
-    var filtered = loadNotes().filter((value, index, arr) => {
-        return value.title === title;
-    })
-
+    var filtered = loadNotes().filter((value, index, arr) => value.title === title)
     if (filtered.length > 0) {
         filtered.forEach((note) => {
             if (note.title === title) {
@@ -67,14 +57,13 @@ const readNote = (title) => {
     }
 }
 
-const getNotes = () => {
-    loadNotes().forEach(note => {
-        logNote(note)
-    });
+const listNotes = () => {
+    console.log(chalk.blueBright.underline("Printing All Notes"))
+    loadNotes().forEach(note => logNote(note));
 }
 
 module.exports = { 
-    getNotes,
+    listNotes,
     addNote,
     removeNote,
     readNote
