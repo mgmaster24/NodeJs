@@ -18,13 +18,13 @@ const saveNotes = (notes) => {
 }
 
 const logNote = (note) => 
-    console.log('Title: ' + note.title + '\nBody: ' + note.body + '\n')
+    console.log(chalk.blue('Title: ' + note.title) + '\nBody: ' + note.body + '\n')
 
 // add note
 const addNote = (title, body) => {
     const notes = loadNotes();
-    const dupes = notes.filter((note) => note.title === title)
-    if (dupes.length === 0) {
+    const match = notes.find((note) => note.title === title);
+    if (!match) {
         notes.push({ title: title, body: body});
         saveNotes(notes);
         console.log(chalk.bgGreen("New node added!"))
@@ -45,13 +45,9 @@ const removeNote = (title) => {
 } 
 
 const readNote = (title) => {
-    var filtered = loadNotes().filter((value, index, arr) => value.title === title)
-    if (filtered.length > 0) {
-        filtered.forEach((note) => {
-            if (note.title === title) {
-                logNote(note)
-            }
-        })
+    var note = loadNotes().find((value) => value.title === title)
+    if (note) {
+        logNote(note);
     } else {
         console.log(chalk.bgRed("No note found for title: " + title))
     }
