@@ -35,7 +35,7 @@ const addNote = (title, body) => {
 
 const removeNote = (title) => {
     const notes = loadNotes();
-    var filtered = notes.filter((note) => note.title !== title)
+    const filtered = notes.filter((note) => note.title !== title)
     if(filtered.length < notes.length) {
         saveNotes(filtered);
         console.log(chalk.bgGreen('Note ' + title + ' removed'))
@@ -45,7 +45,7 @@ const removeNote = (title) => {
 } 
 
 const readNote = (title) => {
-    var note = loadNotes().find((value) => value.title === title)
+    const note = loadNotes().find((value) => value.title === title)
     if (note) {
         logNote(note);
     } else {
